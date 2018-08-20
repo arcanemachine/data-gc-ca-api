@@ -1,4 +1,4 @@
-#!c:\python37\python.exe
+#!/usr/bin/env python
 # vim: set expandtab ts=4 sw=4:
 
 # Copyright (C) 2011 Ian Gable
