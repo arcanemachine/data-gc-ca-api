@@ -6,7 +6,7 @@
 
 ## Auth.: Ian Gable
 
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import sys
 
 
@@ -29,7 +29,7 @@ class CityIndex:
         cityListTree = ElementTree()
 
         try:
-            urlhandle = urllib.urlopen(self.city_list_url)
+            urlhandle = urllib.request.urlopen(self.city_list_url)
         except IOError:
             raise  IOError("Unable to open the data url: " + self.city_list_url)
 
@@ -82,10 +82,10 @@ class CityIndex:
         return None
 
     def english_city_list(self):
-        return self.cities.keys()
+        return list(self.cities.keys())
 
     def french_city_list(self):
-        return [v['nameFr'] for k, v in self.cities.iteritems()]
+        return [v['nameFr'] for k, v in list(self.cities.items())]
 
 
 class City():
@@ -97,9 +97,9 @@ class City():
         self.tree = ElementTree()
 
         try:
-            urlhandle = urllib.urlopen(dataurl)
+            urlhandle = urllib.request.urlopen(dataurl)
         except IOError:
-            print "[Error] Unable to open the data url: " + dataurl
+            print(("[Error] Unable to open the data url: " + dataurl))
             sys.exit(1)
 
         self.tree.parse(urlhandle)
@@ -111,7 +111,7 @@ class City():
     def get_attribute(self, path, attribute):
         """Get the attribute of the element at XPath path"""
         element = self.tree.find(path)
-        if element is not None and element.attrib.has_key(attribute):
+        if element is not None and attribute in element.attrib:
             return element.attrib[attribute]
         return None
         
@@ -143,7 +143,7 @@ class City():
 
     def _make_attribute_list(self, attrib):
         xpathattrib = ""
-        for attribute, value in attrib.iteritems():
+        for attribute, value in list(attrib.items()):
             xpathattrib = xpathattrib + "[@" + attribute + "='" + value + "']"
         return xpathattrib
 
