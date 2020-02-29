@@ -55,7 +55,7 @@ def main():
     parser.add_option("-c", "--city", dest="city",
                                             help="The City you want information about", metavar="CITY")
     parser.add_option("-q", "--quantity", dest="quantity",
-                                            help="the particular quatity toy want to know", metavar="QUANTITY")
+                                            help="the particular quantity you want to know", metavar="QUANTITY")
     parser.add_option("-l", "--list", action="store_true", dest="list",
                                             help="Show a list of the available cities")
     parser.add_option("-a", "--list-quantities", action="store_true", dest="list_quantities",
