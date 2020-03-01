@@ -101,7 +101,7 @@ def main():
 
 
     if cityindex.is_city(city):
-        cityObject = City(cityindex.data_url(city).decode("utf-8"))
+        cityObject = City(cityindex.data_url(city))
         if options.list_quantities:
             for q in cityObject.get_available_quantities():
                 print(q)

@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python
 
 # Copyright (C) 2011 Ian Gable
 # You may distribute under the terms of either the GNU General Public
@@ -8,7 +8,6 @@
 
 import urllib.request, urllib.parse, urllib.error
 import sys
-from io import BytesIO
 
 
 # If we don't have at least python 2.7 we want to require
@@ -38,12 +37,12 @@ class CityIndex:
         siteList = cityListTree.findall("site")
 
         for site in siteList:
-            cityNameEnglish = site.findtext("nameEn")
+            cityNameEnglish = site.findtext("nameEn").encode('utf-8')
             
             self.cities[cityNameEnglish] = {\
-                    'sitecode': site.attrib['code'],\
-                    'provincecode': site.findtext("provinceCode"),\
-                    'nameFr': site.findtext("nameFr") }
+                    'sitecode': site.attrib['code'].encode('utf-8'),\
+                    'provincecode': site.findtext("provinceCode").encode('utf-8'),\
+                    'nameFr': site.findtext("nameFr").encode('utf-8') }
 
             
     def is_city(self, name):
@@ -57,7 +56,7 @@ class CityIndex:
         Returns resource URL for the city denoted by name
         """
         if self.is_city(name):
-            return (self.base_url + self.province(name) + "/" + self.site_code(name) + "_e.xml").encode("ascii")
+            return self.base_url + self.province(name) + "/" + self.site_code(name) + "_e.xml"
         return None
 
     def province(self,name):

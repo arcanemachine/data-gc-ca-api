@@ -62,7 +62,7 @@ def main():
     (options, args) = parser.parse_args()
 
     # globals
-    city = "Victoria"
+    city = "Grande Prairie"
     quantity = "currentConditions/temperature"
 
     cityindex = CityIndex()
